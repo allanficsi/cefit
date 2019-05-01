@@ -29,6 +29,7 @@ export class AptareCrudController <Entity,
   util: UtilService;
 
   listaUf = [];
+  listaDIAS=[];
 
   cadastroUnico: CadastroUnico;
             
@@ -275,6 +276,17 @@ export class AptareCrudController <Entity,
       this.listaUf.push({nome:"SP", valor:"SP"});
       this.listaUf.push({nome:"SE", valor:"SE"});
       this.listaUf.push({nome:"TO", valor:"TO"});
+
+    }
+
+    if(this.listaDIAS.length == 0) {
+      this.listaDIAS.push({nome: "Domingo", valor: 0});
+      this.listaDIAS.push({nome: "Segunda-Feira", valor: 1});
+      this.listaDIAS.push({nome: "Terca-Feira", valor: 2});
+      this.listaDIAS.push({nome: "Quarta-Feira", valor: 3});
+      this.listaDIAS.push({nome: "Quinta-Feira", valor: 4});
+      this.listaDIAS.push({nome: "Sexta-Feira", valor: 5});
+      this.listaDIAS.push({nome: "Sábado", valor: 6});
 
     }
   }

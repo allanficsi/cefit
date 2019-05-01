@@ -25,6 +25,7 @@ import { TrabalhadorService } from '../../../services/trabalhador/trabalhador.se
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import {AgendaTrabalhador} from '../../../model/trabalhador/agendaTrabalhador';
 
 @Component({
   selector: 'app-trabalhador-atualizar',
@@ -44,6 +45,7 @@ export class TrabalhadorAtualizarComponent extends AptareCrudController<Trabalha
   listaDeficiencia = [];
   listaTrabalhadorCbo = [];
   listaTrabalhadorDeficiencia = [];
+  listaAgendaTrabalhador=[];
   endereco: Endereco;
   telefonePf: Telefone;
   trabalhadorCbo: TrabalhadorCbo;
@@ -113,7 +115,9 @@ export class TrabalhadorAtualizarComponent extends AptareCrudController<Trabalha
     this.objetoAtualiza.cadastroUnico.pessoaFisica = new PessoaFisica();
     this.objetoAtualiza.cadastroUnico.pessoaFisica.ufOrgaoEmissorRg = 'AC';
     this.objetoAtualiza.cadastroUnico.pessoaFisica.sexo = 'M';
-    this.objetoAtualiza.cadastroUnico.pessoaFisica.estadoCivil = 1; 
+    this.objetoAtualiza.cadastroUnico.pessoaFisica.estadoCivil = 1;
+
+    this.listaDIAS.forEach(value => this.listaAgendaTrabalhador.push(new AgendaTrabalhador()));
 
   }
 
@@ -353,6 +357,8 @@ export class TrabalhadorAtualizarComponent extends AptareCrudController<Trabalha
     });
   }
 
+
+
   pesquisarCep() {
     if(this.endereco.cepFormatado != null
         && this.endereco.cepFormatado != '') {
@@ -565,6 +571,18 @@ export class TrabalhadorAtualizarComponent extends AptareCrudController<Trabalha
       }
     }
 
+    //AGENDA
+    this.objetoAtualiza.listaAgendaTrabalhador = [];
+    if(typeof this.listaAgendaTrabalhador !== "undefined" && this.listaAgendaTrabalhador.length > 0) {
+      for(let i = 0; i < this.listaAgendaTrabalhador.length; i++) {
+        if(this.listaAgendaTrabalhador[i].fgChecked)
+        this.objetoAtualiza.listaAgendaTrabalhador.push(this.listaAgendaTrabalhador[i]);
+      }
+
+      this.objetoAtualiza.listaAgendaTrabalhador.forEach(value => {console.log(value.nomeDia)});
+    }
+
+
     //AUDITORIA
     this.objetoAtualiza.situacao = 2;  //ATIVO
     this.objetoAtualiza.situacaoIngresso = 1; //PENDENTE DE AVALIACAO
@@ -771,4 +789,38 @@ export class TrabalhadorAtualizarComponent extends AptareCrudController<Trabalha
     return this.validarInserir();
   }
 
+  setDia($event, i) {
+   this.listaAgendaTrabalhador[i].nomeDia = $event.target.value;
+  }
+
+  replicarHorario(i) {
+    this.listaAgendaTrabalhador.forEach((element, index) => {
+      if(index!=i){
+        element.nrHor1=this.listaAgendaTrabalhador[i].nrHor1;
+        element.nrHor2=this.listaAgendaTrabalhador[i].nrHor2;
+        element.nrHor3=this.listaAgendaTrabalhador[i].nrHor3;
+        element.nrHor4=this.listaAgendaTrabalhador[i].nrHor4;
+      }
+    })
+  }
+
+  limparAllHorario() {
+
+    this.listaAgendaTrabalhador.forEach(element => {
+      element.nrHor1=null;
+      element.nrHor2=null;
+      element.nrHor3=null;
+      element.nrHor4=null;
+    })
+
+  }
+
+  limparHorario(i) {
+
+    this.listaAgendaTrabalhador[i].nrHor1=null;
+    this.listaAgendaTrabalhador[i].nrHor2=null;
+    this.listaAgendaTrabalhador[i].nrHor3=null;
+    this.listaAgendaTrabalhador[i].nrHor4=null;
+
+  }
 }

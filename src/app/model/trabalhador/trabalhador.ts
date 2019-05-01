@@ -3,6 +3,7 @@ import { Auditoria } from "../auditoria";
 import { Cbo } from "./cbo";
 import { TrabalhadorCbo } from "./trabalhador-cbo";
 import { TrabalhadorDeficiencia } from "./trabalhador-deficiencia";
+import {AgendaTrabalhador} from './agendaTrabalhador';
 
 export class Trabalhador {
     
@@ -28,5 +29,6 @@ export class Trabalhador {
 
     listaTrabalhadorCbo: TrabalhadorCbo[];
     listaTrabalhadorDeficiencia: TrabalhadorDeficiencia[];
+    listaAgendaTrabalhador:AgendaTrabalhador[];
 
 }

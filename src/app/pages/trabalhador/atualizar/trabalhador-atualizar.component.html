@@ -593,6 +593,72 @@
                 </div>
               </div>
 
+              <!-- AGENDA -->
+              <div class="card card-outlined style-primary" id="divAgenda">
+                <div class="card-head">
+                  <header>AGENDA</header>
+                </div>
+
+                <div class="card-body" style="display: block;">
+                  <div class="row">
+
+                    <div class="col-sm-7">
+                      <div class="card">
+                        <div class="card-body no-padding">
+                          <div class="table-responsive no-margin">
+                            <table id="datatable1" class="table table-hover no-margin">
+                              <thead class="style-default-dark">
+                              <tr>
+                                <th style="width: 25%;" class="text-center" >Dias</th>
+                                <th style="width: 16%;" class="text-center">Disponível </th>
+                                <th style="width: 16%;" class="text-center">Horário 1</th>
+                                <th style="width: 16%;" class="text-center">Horário 2</th>
+                                <th style="width: 16%;" class="text-center">Horário 3</th>
+                                <th style="width: 16%;" class="text-center">Horário 4</th>
+                                <th class="text-center" style="width: 3%;"></th>
+                                <th class="text-center" style="width: 3%;" title="Apagar todos os horários"><i class="fa fa-eraser" (click)="limparAllHorario()" style="width:18px; height: 18px; cursor: pointer;"></i></th>
+                              </tr>
+                              </thead>
+
+                              <h1>oi {{listaAgendaTrabalhador[0].fgChecked}}</h1>
+                              <tr *ngFor="let item of listaDIAS; let i = index" >
+
+                                <td class="text-center"><b> <span>{{item.nome}}</span></b></td>
+                                <td>
+                                <div class="checkbox checkbox-inline checkbox-styled text-center">
+                                  <label>
+                                    <input type="checkbox" [(ngModel)]="listaAgendaTrabalhador[i].fgChecked" name="selecionado" value="{{item.valor}}" (change)="setDia($event,i)"  ><span></span>
+                                  </label>
+                                </div>
+                                </td>
+                                <td class="text-center">
+                                  <input type="text" [(ngModel)]="listaAgendaTrabalhador[i].nrHor1" mask="Hh:m0" name="nrHor1{{i}}" class="form-control" style="text-align: center">
+                                </td>
+                                <td class="text-center">
+                                  <input type="text" [(ngModel)]="listaAgendaTrabalhador[i].nrHor2" mask="Hh:m0" name="nrHor2{{i}}" class="form-control" style="text-align: center">
+                                </td>
+                                <td class="text-center">
+                                  <input type="text" [(ngModel)]="listaAgendaTrabalhador[i].nrHor3" mask="Hh:m0" name="nrHor3{{i}}" class="form-control" style="text-align: center">
+                                </td>
+                                <td class="text-center">
+                                  <input type="text" [(ngModel)]="listaAgendaTrabalhador[i].nrHor4" mask="Hh:m0" name="nrHor4{{i}}" class="form-control" style="text-align: center">
+                                </td>
+                                <td class="text-center">
+                                  <i class="fa fa-thumb-tack" title="Replicar para todos os horários" (click)="replicarHorario(i)" style="width:18px; height: 18px; cursor: pointer;"></i>
+                                </td>
+                                <td class="text-center">
+                                  <i class="fa fa-remove" title="Remover horários do dia" (click)="limparHorario(i)" style="width:18px; height: 18px; cursor: pointer;"></i>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="card-actionbar">
                   <div class="card-actionbar-row">
                     
